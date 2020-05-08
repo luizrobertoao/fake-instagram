@@ -6,6 +6,10 @@ const router = express.Router();
 // Importação dos controllers que "comandam" as rotas:
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const postController = require('../controllers/postController');
+
+const upload = require('../config/uploads');
+const auth = require('../middleware/auth');
 
 
 // **INICIO ROTAS**
@@ -29,5 +33,9 @@ router.get("/home", function (req, res, next) {
     title: "Express"
   });
 });
+
+// Rota para criar novo post
+router.get("/publicar", auth, postController.create);
+router.post('/publicar', upload.any(), postController.store);
 
 module.exports = router;
