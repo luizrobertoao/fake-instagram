@@ -1,3 +1,4 @@
+// Arquivo criado por padrão quando instalamos o "pacote" models do sequelize(sequelize init:models), mas isso após ter instalado o pacote "sequelize-cli" em modo de desenvolvimento (-D). Esse arquivo se encarrega de executar os models(que são as representações das tabelas do nosso BD) e exportá-los em um array para que possam ser usados nas consultas ao BD, normalmente temos que alterar a linha que importa aqui a configuração do sequelize(database.js).
 'use strict';
 
 const fs = require('fs');

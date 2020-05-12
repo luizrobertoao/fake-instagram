@@ -7,8 +7,9 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const postController = require('../controllers/postController');
-
+// Importação da configuração do multer.
 const upload = require('../config/uploads');
+// Importação do middleware auth, que verifica se o usuário já está logado.
 const auth = require('../middleware/auth');
 
 
@@ -28,14 +29,13 @@ router.get("/registro", userController.create);
 // rota para salvar os dados do usuário no banco de dados.
 router.post("/registro", userController.store);
 
-router.get("/home", function (req, res, next) {
-  res.render("index", {
-    title: "Express"
-  });
-});
+// Rota para o feed.
+router.get("/home", auth, postController.index);
 
-// Rota para criar novo post
+// Rota para criar novo post:
+// Na rota GET incluimos o middleware "auth" para restringir o acesso aos usuários logados.
 router.get("/publicar", auth, postController.create);
+// Na rota POST incluimos o middleware(que na verdade está dentro da pasta config por se tratar de uma configuração do sistema) com a execução do método ".any()", o que autoriza o usuário a upar mais de um arquivo.
 router.post('/publicar', upload.any(), postController.store);
 
 module.exports = router;

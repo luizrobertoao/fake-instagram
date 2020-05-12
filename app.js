@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+// Importação do pacote session.
 const session = require("express-session");
 
 var indexRouter = require("./routes/index");
@@ -16,6 +17,7 @@ app.set("view engine", "ejs");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// Indicação de uso e configuração do pacote session.
 app.use(session({
   secret: "String para reforçar a criptografia e segurança da session.",
   resave:true,
