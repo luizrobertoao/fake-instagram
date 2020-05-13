@@ -7,6 +7,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const postController = require('../controllers/postController');
+const commentController = require('../controllers/commentController');
 // Importação da configuração do multer.
 const upload = require('../config/uploads');
 // Importação do middleware auth, que verifica se o usuário já está logado.
@@ -31,6 +32,9 @@ router.post("/registro", userController.store);
 
 // Rota para o feed.
 router.get("/home", auth, postController.index);
+
+// Rota para comentário.
+router.post("/comentar/:idPost", commentController.store);
 
 // Rota para criar novo post:
 // Na rota GET incluimos o middleware "auth" para restringir o acesso aos usuários logados.

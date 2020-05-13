@@ -19,7 +19,8 @@
         <nav>
           <a href="/publicar">
             <img src="/img/icons/plus.svg" alt="Adicionar Publicação" title="Adicionar Publicação">
-          <a href="http://">
+          </a>
+          <a href="/home">
             <img src="/img/icons/home.svg">
           </a>
           <a href="">
@@ -37,7 +38,7 @@
           <div class="card-header">
             <div>
               <img class="avatar" src="/img/avatar-example.png">
-              <b> <%= publication.user.name %>  </b>
+              <b> <%= publication.User.name %>  </b>
             </div>
               <img src="/img/icons/more-vertical.svg">
           </div>
@@ -48,20 +49,22 @@
             <div class="card-itens">
               <div class="likes">
                 <img src="/img/icons/heart.svg">
-                <b> <%= publication.like %>  </b>
+                <b> <%= publication.like %> likes </b>
               </div>
-              <b> <%= moment(publication.create_at).format('DD/MM/YYYY') %>  </b>
+              <b> Postado no dia: <%= moment(publication.create_at).format('DD/MM/YYYY') %>  </b>
             </div>
             <div class="card-comments">
-              <p><b>ovinnyoliveira</b> Mano que incrivel</p>
-              <p><b>front.hendy</b> <3 </p>
-              <p><b>verofefo</b> aff.. </p>
+              
+              <% publication.Comments.forEach( comment => { %> 
+              <p><b><%= comment.User.username %></b> <%= comment.description %>  </p>
+                <% }) %>
+              
             </div>
            
           </div>
-          <form class="form-comments" action="">
-            <input type="text" placeholder="Adicione um comentário...">
-            <button>Publicar</button>
+          <form class="form-comments" action="/comentar/<%= publication.id %>" method="POST">
+            <input type="text" name="description" placeholder="Adicione um comentário...">
+            <button type="submit">Publicar</button>
           </form>
         </div>
       <% }) %>
