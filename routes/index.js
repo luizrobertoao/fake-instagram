@@ -36,6 +36,9 @@ router.get("/home", auth, postController.index);
 // Rota para comentário.
 router.post("/comentar/:idPost", commentController.store);
 
+// Rota para o like.
+router.get('/publicacao/:id/like', postController.like);
+
 // Rota para criar novo post:
 // Na rota GET incluimos o middleware "auth" para restringir o acesso aos usuários logados.
 router.get("/publicar", auth, postController.create);

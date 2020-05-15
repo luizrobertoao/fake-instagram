@@ -31,6 +31,9 @@ const postController = {
                     },
                 },
             ],
+            order: [
+                ['id', 'DESC']
+            ]
         });
 
         return res.render('index', {
@@ -71,6 +74,19 @@ const postController = {
 
         // Redirecionamento do usuário para a página home.
         return res.redirect('/home');
+    },
+
+    like: async (req, res) => {
+        const { id } = req.params;
+
+        const publicationData = await Publication.findByPk(id);
+
+        publicationData.like = publicationData.like + 1;
+
+        await publicationData.save();
+
+        return res.redirect('/home');
+
     },
 };
 
